@@ -1,0 +1,37 @@
+Simple mechanism to share data between python processes
+This directory contains two clients for testing performance with Python 2.7
+
+--------------------
+Mechanism 1 : Use Multiprocessing module in python 
+Mechanism 2 : Use memcached
+
+
+--------------------
+Results (single core AWS micro instance):
+Multiprocessing with python : 14285 lock operations per second
+Memcached : 6000 operations per second
+
+8 core laptop
+Multiprocessing with python : 8000 lock operations per second
+Memcached : 14000 operations per second
+
+
+--------------------
+How To Run?
+Each of this program intializes a variable called "budget" to 100,000. One operation is to decrement it by 1. We measure E2E time and calculate number of operations/elapsed time.
+
+1. Python multiprocessing
+Simply run process_synchronization.py
+
+
+2. memcached:
+Use 2 or more terminals to spawn concurrent instance of run_one_client.py.
+Each script independently computes its statistics.
+Use script initialize_budget.py to initialize budget after every run.
+
+
+To install memcached : https://memcached.org/downloads
+If "make test" fails for "prove" command, you can still continue with "make install"
+Install libevent-devl with yum
+
+Install pymemcache with pip
